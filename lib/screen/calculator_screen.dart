@@ -41,10 +41,22 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     "*",
     "/",
   ];
-
   String operator = "";
+  int noOfButtons = 4;
+
   @override
   Widget build(BuildContext context) {
+    // Check for the orientation of a phone
+    if (MediaQuery.of(context).orientation == Orientation.landscape) {
+      setState(() {
+        noOfButtons = 6;
+      });
+    } else {
+      setState(() {
+        noOfButtons = 4;
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Calculator App'),
@@ -75,8 +87,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             ),
             Expanded(
               child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: noOfButtons,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
